@@ -12,7 +12,7 @@ const Notes = () => {
   const [error, setError] = useState("");
   const { user } = useAuth();
 
-  console.log(notes);
+  // console.log(notes);
 
   useEffect(() => {
     fetchNotes();
@@ -43,7 +43,7 @@ const Notes = () => {
     try {
       if (editingNote) {
         const res=await axios.put(`${import.meta.env.VITE_UPDATE_NOTE}${editingNote._id}`, { title, content });
-        console.log(res);
+        // console.log(res);
         
         setEditingNote(null);
       } else {
@@ -72,10 +72,12 @@ const Notes = () => {
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this note?")) return;
-    console.log(id);
+    // console.log(id);
 
     try {
-      await axios.delete(`${import.meta.env.VITE_DEL_NOTE}${id}`);
+      await axios.delete(`${import.meta.env.VITE_DEL_NOTE}${id}`, {
+  withCredentials: true
+});
       fetchNotes();
     } catch (error) {
       setError("Failed to delete note");
