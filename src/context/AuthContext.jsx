@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const res = await axios.post("http://localhost:8000/api/v1/users/login", { email, password });
+      const res = await axios.post(import.meta.env.VITE_LOGIN_USER, { email, password });
       const { accessToken, User, tenant } = res.data;
 
       localStorage.setItem("token", accessToken);
